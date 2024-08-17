@@ -1,0 +1,22 @@
+
+INSERT INTO ingredient (name, quantity_in_stock, unity) VALUES
+                                                             ('Farinha', 100.0, 'kg'),
+                                                             ('Açúcar', 50.0, 'kg'),
+                                                             ('Manteiga', 25.0, 'kg'),
+                                                             ('Ovos', 200.0, 'unidades'),
+                                                             ('Leite', 100.0, 'litros'),
+                                                             ('Cacau em Pó', 30.0, 'kg'),
+                                                             ('Extrato de Baunilha', 10.0, 'ml'),
+                                                             ('Fermento em Pó', 15.0, 'kg'),
+                                                             ('Sal', 20.0, 'kg'),
+                                                             ('Gotas de Chocolate', 50.0, 'kg'),
+                                                             ('Creme', 30.0, 'litros'),
+                                                             ('Morangos', 100.0, 'kg'),
+                                                             ('Mirtilos', 100.0, 'kg'),
+                                                             ('Bananas', 100.0, 'unidades'),
+                                                             ('Fermento Biológico', 10.0, 'kg'),
+                                                             ('Canela', 10.0, 'kg'),
+                                                             ('Mel', 10.0, 'litros'),
+                                                             ('Raspas de Limão', 5.0, 'kg'),
+                                                             ('Amêndoas', 20.0, 'kg'),
+                                                             ('Amendoim', 20.0, 'kg');
