@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package protobuf;
+
+import "google/protobuf/timestamp.proto";
+
+option java_package = "com.system.ordercontrol.protobuf";
+option java_outer_classname = "OrderProto";
+
+message OrderItem {
+  string product_id = 1;
+  int32 quantity = 2;
+  double price = 3;
+}
+
+message Order {
+  string id = 1;
+  string customer_name = 2;
+  string customer_email = 3;
+  string status = 4;
+  repeated OrderItem order_items = 5;
+  google.protobuf.Timestamp created_at = 6;
+}

@@ -13,5 +13,48 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
+  zookeeper-order-control:
+    container_name: zookeeper-order-control
+    image: confluentinc/cp-zookeeper:7.6.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - order-control-stack
+    ports:
+      - "2181:2181"
+    healthcheck:
+      test: nc -z localhost 2181 || exit -1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  kafka-order-control:
+    container_name: kafka-order-control
+    image: confluentinc/cp-kafka:7.6.1
+    depends_on:
+      zookeeper-order-control:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper-order-control:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - order-control-stack
+    ports:
+      - "9092:9092"
+    healthcheck:
+      test: kafka-topics --bootstrap-server 127.0.0.1:9092 --list
+      interval: 10s
+      timeout: 10s
+      retries: 50
+
 volumes:
   db_data:
+
+networks: {order-control-stack: {}}

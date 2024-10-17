@@ -13,6 +13,13 @@ spring:
     url: ${spring.datasource.url}
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+
+kafka:
+  order-created-topic-name: order-created-hybrid-v1
 
 logging:
   level:
@@ -23,6 +30,8 @@ logging:
           descriptor:
             sql:
               BasicBinder: trace
+
+
 
 
 
