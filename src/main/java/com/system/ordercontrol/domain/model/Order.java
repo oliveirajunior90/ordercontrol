@@ -10,8 +10,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,9 +36,27 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status = OrderStatusEnum.PENDING;
 
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @CreationTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
+
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private Set<OrderItem> orderItems;
+
+    public Order(String customerName, String customerEmail, Set<OrderItem> items) {
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.orderItems = items;
+    }
+
+    public Order() {
+
+    }
 
     public UUID getId() {
         return id;
@@ -75,5 +96,13 @@ public class Order {
 
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }

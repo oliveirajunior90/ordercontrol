@@ -1,9 +1,10 @@
 package com.system.ordercontrol.order;
 
 import com.system.ordercontrol.domain.model.Order;
+import com.system.ordercontrol.order.dto.CreateOrderDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,13 +21,8 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    public ResponseEntity<HttpStatus> createOrder(Order order) {
-        orderService.upsert(order);
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-    public ResponseEntity<HttpStatus> updateOrder(Order order) {
-        orderService.upsert(order);
+    public ResponseEntity<HttpStatus> createOrder(CreateOrderDTO dto) {
+        orderService.create(dto.toOrder());
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -39,7 +35,8 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getOrder(id));
     }
 
-    public Iterable<Order> getOrders() {
-        return orderService.getOrders();
+    @GetMapping("/get")
+    public ResponseEntity<Iterable<Order>> getOrders() {
+        return ResponseEntity.ok(orderService.getOrders());
     }
 }

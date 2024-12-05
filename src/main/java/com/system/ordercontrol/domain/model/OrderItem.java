@@ -1,17 +1,27 @@
 package com.system.ordercontrol.domain.model;
 
+import jakarta.persistence.Column;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class OrderItem {
-    private Long id;
-    private Product product;
+    private String productId;
     private int quantity;
 
-    public OrderItem(Long id, Product product, int quantity) {
-        this.id = id;
-        this.product = product;
+    public OrderItem(String productId,  int quantity) {
+        this.productId = productId;
         this.quantity = quantity;
     }
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @CreationTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {
@@ -19,21 +29,29 @@ public class OrderItem {
         if (o == null || getClass() != o.getClass()) return false;
         OrderItem orderItem = (OrderItem) o;
         return quantity == orderItem.quantity &&
-                Objects.equals(id, orderItem.id) &&
-                Objects.equals(product, orderItem.product);
+                Objects.equals(productId, orderItem.productId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, product, quantity);
+        return Objects.hash(productId, quantity);
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public Product getProduct() { return product; }
-    public void setProduct(Product product) { this.product = product; }
+    public String getProductId() { return productId; }
+    public void setProductId(String productId) { this.productId = productId; }
 
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public String getSlug() {
+        return productId;
+    }
 }

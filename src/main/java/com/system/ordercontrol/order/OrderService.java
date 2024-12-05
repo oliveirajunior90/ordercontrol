@@ -11,8 +11,14 @@ import java.util.UUID;
 public class OrderService {
 
     OrderRepository orderRepository;
+//    IngredientService ingredientService;
 
-    public void upsert(Order order) {
+    public void create(Order order) {
+
+//        if(!ingredientService.hasEnoughIngredients(order.orderItems())) {
+//            throw new NoIngredientsException();
+//        }
+
         orderRepository.save(order);
     }
 
