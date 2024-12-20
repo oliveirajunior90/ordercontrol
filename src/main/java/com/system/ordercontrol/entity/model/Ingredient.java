@@ -1,4 +1,4 @@
-package com.system.ordercontrol.domain.model;
+package com.system.ordercontrol.entity.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
@@ -7,7 +7,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
@@ -25,6 +27,28 @@ public class Ingredient {
     private double quantityInStock;
 
     private String unity;
+
+    private String slug;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @CreationTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
+
+
+    public Ingredient(Long id, String name, double quantityInStock, String unity, String slug) {
+        this.id = id;
+        this.name = name;
+        this.quantityInStock = quantityInStock;
+        this.unity = unity;
+        this.slug = slug;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
 
     public Long getId() {
         return id;
@@ -57,6 +81,23 @@ public class Ingredient {
     public void setQuantityInStock(double quantityInStock) {
         this.quantityInStock = quantityInStock;
     }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
 
     @Override
     public boolean equals(Object obj) {

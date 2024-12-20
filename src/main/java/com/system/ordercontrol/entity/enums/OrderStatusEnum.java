@@ -1,4 +1,4 @@
-package com.system.ordercontrol.domain.enums;
+package com.system.ordercontrol.entity.enums;
 
 public enum OrderStatusEnum {
     PENDING,

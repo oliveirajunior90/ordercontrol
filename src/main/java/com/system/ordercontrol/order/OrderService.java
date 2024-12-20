@@ -1,23 +1,30 @@
 package com.system.ordercontrol.order;
 
-import com.system.ordercontrol.domain.model.Order;
+import com.system.ordercontrol.entity.model.Ingredient;
+import com.system.ordercontrol.entity.model.Order;
+import com.system.ordercontrol.entity.model.OrderItem;
+import com.system.ordercontrol.entity.model.Product;
+import com.system.ordercontrol.ingredients.IngredientService;
+import com.system.ordercontrol.ingredients.exception.InsufficientIngredientsException;
+import com.system.ordercontrol.order.dto.CreateOrderDTO;
+import com.system.ordercontrol.product.ProductService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
 
     OrderRepository orderRepository;
 
-    public void upsert(Order order) {
-        orderRepository.save(order);
+
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
     }
 
-    public void delete(UUID id) {
-        orderRepository.deleteById(id);
+    public void create(CreateOrderDTO orderDto) {
+        orderRepository.save(orderDto.toOrder());
     }
 
     public Optional<Order> getOrder(UUID id) {
@@ -27,4 +34,12 @@ public class OrderService {
     public Iterable<Order> getOrders() {
         return orderRepository.findAll();
     }
+
+//    private Map<String, Double> getTotalPerIngredient(List<Product> products) {
+//        return products.stream().flatMap(product -> product.getIngredients().stream())
+//            .collect(Collectors.groupingBy(
+//                    Ingredient::getName,
+//                    Collectors.summingDouble(Ingredient::getQuantityInStock)
+//            ));
+//    }
 }

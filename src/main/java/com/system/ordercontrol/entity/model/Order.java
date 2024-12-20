@@ -1,6 +1,6 @@
-package com.system.ordercontrol.domain.model;
+package com.system.ordercontrol.entity.model;
 
-import com.system.ordercontrol.domain.enums.OrderStatusEnum;
+import com.system.ordercontrol.entity.enums.OrderStatusEnum;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,8 +10,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -33,9 +36,37 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatusEnum status = OrderStatusEnum.PENDING;
 
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @CreationTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
+
     @Type(JsonType.class)
     @Column(columnDefinition = "jsonb")
     private Set<OrderItem> orderItems;
+
+    public Order(String customerName, String customerEmail, Set<OrderItem> items) {
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.orderItems = items;
+    }
+
+    public Order() {
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(customerName, order.customerName) &&
+                Objects.equals(customerEmail, order.customerEmail) &&
+                Objects.equals(orderItems, order.orderItems);
+    }
 
     public UUID getId() {
         return id;
@@ -75,5 +106,13 @@ public class Order {
 
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 }
