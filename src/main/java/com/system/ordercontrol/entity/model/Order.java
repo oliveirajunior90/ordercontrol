@@ -1,6 +1,6 @@
-package com.system.ordercontrol.domain.model;
+package com.system.ordercontrol.entity.model;
 
-import com.system.ordercontrol.domain.enums.OrderStatusEnum;
+import com.system.ordercontrol.entity.enums.OrderStatusEnum;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -56,6 +56,16 @@ public class Order {
 
     public Order() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(customerName, order.customerName) &&
+                Objects.equals(customerEmail, order.customerEmail) &&
+                Objects.equals(orderItems, order.orderItems);
     }
 
     public UUID getId() {

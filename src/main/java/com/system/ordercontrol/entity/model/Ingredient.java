@@ -1,4 +1,4 @@
-package com.system.ordercontrol.domain.model;
+package com.system.ordercontrol.entity.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
@@ -37,6 +37,18 @@ public class Ingredient {
     @CreationTimestamp
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+
+    public Ingredient(Long id, String name, double quantityInStock, String unity, String slug) {
+        this.id = id;
+        this.name = name;
+        this.quantityInStock = quantityInStock;
+        this.unity = unity;
+        this.slug = slug;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
 
     public Long getId() {
         return id;
@@ -85,6 +97,7 @@ public class Ingredient {
     public String getSlug() {
         return slug;
     }
+
 
     @Override
     public boolean equals(Object obj) {

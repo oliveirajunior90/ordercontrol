@@ -1,6 +1,6 @@
 package com.system.ordercontrol.ingredients;
 
-import com.system.ordercontrol.domain.model.Ingredient;
+import com.system.ordercontrol.entity.model.Ingredient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

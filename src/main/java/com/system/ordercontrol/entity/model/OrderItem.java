@@ -1,4 +1,4 @@
-package com.system.ordercontrol.domain.model;
+package com.system.ordercontrol.entity.model;
 
 import jakarta.persistence.Column;
 import org.hibernate.annotations.CreationTimestamp;
@@ -7,10 +7,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class OrderItem {
-    private String productId;
+    private Long productId;
     private int quantity;
 
-    public OrderItem(String productId,  int quantity) {
+    public OrderItem(Long productId,  int quantity) {
         this.productId = productId;
         this.quantity = quantity;
     }
@@ -37,8 +37,8 @@ public class OrderItem {
         return Objects.hash(productId, quantity);
     }
 
-    public String getProductId() { return productId; }
-    public void setProductId(String productId) { this.productId = productId; }
+    public Long getProductId() { return productId; }
+    public void setProductId(Long productId) { this.productId = productId; }
 
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
@@ -49,9 +49,5 @@ public class OrderItem {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public String getSlug() {
-        return productId;
     }
 }

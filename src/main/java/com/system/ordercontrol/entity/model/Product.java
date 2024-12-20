@@ -1,6 +1,5 @@
-package com.system.ordercontrol.domain.model;
+package com.system.ordercontrol.entity.model;
 
-import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,14 +7,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "product")
@@ -42,6 +38,20 @@ public class Product {
     @Column(name = "ingredient", columnDefinition = "jsonb")
     private Set<Ingredient> ingredients;
 
+    public Product(Long id, String name, String description, double price, String slug, Set<Ingredient> ingredients) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.slug = slug;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.ingredients = ingredients;
+    }
+
+    public Product() {
+
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

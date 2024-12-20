@@ -1,10 +1,11 @@
 package com.system.ordercontrol.product;
 
-import com.system.ordercontrol.domain.model.Ingredient;
-import com.system.ordercontrol.domain.model.Product;
+import com.system.ordercontrol.entity.model.Ingredient;
+import com.system.ordercontrol.entity.model.Product;
 import com.system.ordercontrol.ingredients.IngredientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -33,6 +34,10 @@ public class ProductService {
 
     public Optional<Product> get(UUID id) {
         return productRepository.findById(id);
+    }
+
+    public List<Product> findByIdIn(List<Product> productIds) {
+        return productRepository.findByIdIn(productIds);
     }
 
     public Iterable<Product> getAll() {
