@@ -1,7 +1,8 @@
-package com.system.ordercontrol.order;
+package com.system.ordercontrol.application.api.v1.controller;
 
-import com.system.ordercontrol.entity.model.Order;
-import com.system.ordercontrol.order.dto.CreateOrderDTO;
+import com.system.ordercontrol.domain.entity.Order;
+import com.system.ordercontrol.application.service.OrderService;
+import com.system.ordercontrol.application.dto.CreateOrderDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/order")
-public class OrderController {
+public class OrderControllerV1 {
     OrderService orderService;
 
-    public OrderController(OrderService orderService) {
+    public OrderControllerV1(OrderService orderService) {
         this.orderService = orderService;
     }
 

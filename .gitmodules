@@ -1,0 +1,7 @@
+[submodule "proto-resources"]
+	path = proto-resources
+	url = git@github.com:oliveirajunior90/commerce-proto.git
+	branch = main
+[submodule "commerce-proto"]
+	path = commerce-proto
+	url = git@github.com:oliveirajunior90/commerce-proto.git

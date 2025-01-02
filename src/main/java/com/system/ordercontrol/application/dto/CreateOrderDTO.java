@@ -1,7 +1,7 @@
-package com.system.ordercontrol.order.dto;
+package com.system.ordercontrol.application.dto;
 
-import com.system.ordercontrol.entity.model.Order;
-import com.system.ordercontrol.entity.model.OrderItem;
+import com.system.ordercontrol.domain.entity.Order;
+import com.system.ordercontrol.domain.entity.OrderItem;
 
 import java.util.Set;
 

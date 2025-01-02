@@ -1,6 +1,6 @@
-package com.system.ordercontrol.entity.model;
+package com.system.ordercontrol.domain.entity;
 
-import com.system.ordercontrol.entity.enums.OrderStatusEnum;
+import com.system.ordercontrol.domain.enums.OrderStatusEnum;
 import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

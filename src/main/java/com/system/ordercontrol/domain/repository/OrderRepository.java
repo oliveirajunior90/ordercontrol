@@ -1,6 +1,6 @@
-package com.system.ordercontrol.order;
+package com.system.ordercontrol.domain.repository;
 
-import com.system.ordercontrol.entity.model.Order;
+import com.system.ordercontrol.domain.entity.Order;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.repository.CrudRepository;
 

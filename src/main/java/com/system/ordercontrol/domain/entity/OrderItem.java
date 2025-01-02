@@ -1,4 +1,4 @@
-package com.system.ordercontrol.entity.model;
+package com.system.ordercontrol.domain.entity;
 
 import jakarta.persistence.Column;
 import org.hibernate.annotations.CreationTimestamp;

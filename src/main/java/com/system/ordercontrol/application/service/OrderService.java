@@ -1,17 +1,11 @@
-package com.system.ordercontrol.order;
+package com.system.ordercontrol.application.service;
 
-import com.system.ordercontrol.entity.model.Ingredient;
-import com.system.ordercontrol.entity.model.Order;
-import com.system.ordercontrol.entity.model.OrderItem;
-import com.system.ordercontrol.entity.model.Product;
-import com.system.ordercontrol.ingredients.IngredientService;
-import com.system.ordercontrol.ingredients.exception.InsufficientIngredientsException;
-import com.system.ordercontrol.order.dto.CreateOrderDTO;
-import com.system.ordercontrol.product.ProductService;
+import com.system.ordercontrol.domain.entity.Order;
+import com.system.ordercontrol.application.dto.CreateOrderDTO;
+import com.system.ordercontrol.domain.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
